@@ -1,9 +1,12 @@
 package com.yangyun.test.zk;
 
 import org.apache.zookeeper.*;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -17,6 +20,16 @@ import java.util.concurrent.TimeUnit;
 public class ZookeeperTest {
 
     private static String url = "47.107.172.70:2181,47.107.172.70:2182,47.107.172.70:2183,47.107.172.70:2184";
+
+    @Before
+    public void befor(){
+        List list = new ArrayList();
+        list.stream().forEach(
+                s -> {
+                    System.out.println(s);
+                }
+        );
+    }
 
     @Test
     public void testConnectionZookeeper () throws Exception {
@@ -95,5 +108,8 @@ public class ZookeeperTest {
 
         TimeUnit.SECONDS.sleep(2222222);
     }
+
+
+
 
 }
