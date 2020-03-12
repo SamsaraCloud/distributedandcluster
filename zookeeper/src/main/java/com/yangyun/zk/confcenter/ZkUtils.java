@@ -1,5 +1,6 @@
 package com.yangyun.zk.confcenter;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.zookeeper.ZooKeeper;
 
 import java.util.concurrent.CountDownLatch;
@@ -14,7 +15,8 @@ import java.util.concurrent.CountDownLatch;
 public class ZkUtils {
 
     // /testConf 指定自己的工作目录
-    private static String url = "47.107.172.70:2181,47.107.172.70:2182,47.107.172.70:2183,47.107.172.70:2184/testConf";
+    private static String conf = "47.107.172.70:2181,47.107.172.70:2182,47.107.172.70:2183,47.107.172.70:2184/testConf";
+    private static String lock = "47.107.172.70:2181,47.107.172.70:2182,47.107.172.70:2183,47.107.172.70:2184/testLock";
 
 
     private static ZooKeeper zk;
@@ -29,8 +31,9 @@ public class ZkUtils {
      * @Param []
      * @returnm org.apache.zookeeper.ZooKeeper
      **/
-    public static ZooKeeper getZk ()  {
+    public static ZooKeeper getZk (String type)  {
         try {
+            String url = StringUtils.equals(type, "lock") ? lock : conf;
             zk = new ZooKeeper(url, 1000, watcher);
             // 等待 client 连接上 zk
             cl.await();

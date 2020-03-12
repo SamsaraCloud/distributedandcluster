@@ -22,7 +22,7 @@ public class ZkConfTest {
 
     @Before
     public void befor (){
-        zk = ZkUtils.getZk();
+        zk = ZkUtils.getZk("conf");
         watcher = new WatcherCallBack(zk);
     }
 
